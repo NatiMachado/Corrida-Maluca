@@ -71,19 +71,27 @@ while True:
             
 #Determina quem ganhou     
     if posYCarVermelho == 350 and movXCarVermelho >= 900 and movXCarVermelho > movXCarAmarelo and movxcarAzul:
-        branco = (255,255,255)
+        tela.blit(255,255,255)
         from vitoriavermelho import vitoriaCarVermelho
         fonte = pygame.font.Font(None, 36)
-        texto = fonte.render("Vermelho ganhou a corrida", True, (0, 0, 0), (255, 255, 255))  
+        texto = fonte.render("Vermelho ganhou a corrida", True, (0, 0, 0),branco)  
         tela.blit(texto, (0, 0)) 
         acabou = True
 
     elif posYCarAmarelo == 400 and movXCarAmarelo >= 900 and movXCarAmarelo > movXCarVermelho and movxcarAzul:
-        tela.blit((270,180))
+        tela.blit(255,255,255)
+        vitoriaCarAmarelo = pygame.image.load("Recursos/carroamarelo.jpg")
+        fonte = pygame.font.Font(None, 36)
+        texto = fonte.render("Amarelo ganhou a corrida", True, (0, 0, 0),branco)  
+        tela.blit(texto, (0, 0)) 
         acabou = True
 
     elif posycarAzul == 500 and movxcarAzul >= 900 and movxcarAzul > movXCarAmarelo and movXCarVermelho:
-        tela.blit((270,80))
+        tela.blit(255,255,255)
+        vitoriaCarazul = pygame.image.load("Recursos/carroazulvitoria.jpg")
+        fonte = pygame.font.Font(None, 36)
+        texto = fonte.render("Azul ganhou a corrida", True, (0, 0, 0), branco)  
+        tela.blit(texto, (0, 0))
         acabou = True     
 
 
