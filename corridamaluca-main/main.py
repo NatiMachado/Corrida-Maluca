@@ -11,22 +11,25 @@ pygame.display.set_caption("Corrida Maluca")
 branco = (255,255,255)
 preta = (0,0,0)
 fundo = pygame.image.load("Recursos/fundo.png")
-carro1 = pygame.image.load("Recursos/carro1.png")
-carro2 = pygame.image.load("Recursos/carro2.png")
-carro3 = pygame.image.load("Recursos/carro3.png")
+carroVermelho = pygame.image.load("Recursos/carro1.png")
+carroAmarelo = pygame.image.load("Recursos/carro2.png")
+carroAzul = pygame.image.load("Recursos/carro3.png")
 
-movxcar3=0
-movXCar1 = 0
-movXCar2 = 0
-posYCar1 = 50
-posYCar2 = 180
-posycar3=250
+movXCarVermelho = 0
+movXCarAmarelo = 0
+movxcarAzul=0
+posYCarVermelho = 50
+posYCarAmarelo = 100
+posycarAzul=180
+
 vitoria = pygame.mixer.Sound("Recursos/vitoria.mp3")
 vitoria.set_volume(0.5)
 pygame.mixer.music.load("Recursos/trilha.mp3")
-pygame.mixer.music.play(-1) #-1 looping, 1,2 3 vezes
+pygame.mixer.music.play(-1) 
 acabou = False
 somDaVitoria = False
+
+
 while True:
     for evento in pygame.event.get(): 
         if evento.type == pygame.QUIT:
@@ -34,14 +37,14 @@ while True:
    
     tela.fill( branco )
     tela.blit(fundo, (0,0))
-    tela.blit(carro1, (movXCar1,posYCar1))
-    tela.blit(carro2, (movXCar2,posYCar2))
-    tela.blit(carro3, (movxcar3,posycar3))
+    tela.blit(carroVermelho, (movXCarVermelho,posYCarVermelho))
+    tela.blit(carroAmarelo, (movXCarAmarelo,posYCarAmarelo))
+    tela.blit(carroAzul, (movxcarAzul,posycarAzul))
 
     if not acabou :
-        movXCar1 = movXCar1 + random.randint(0,10)
-        movXCar2 = movXCar2 + random.randint(0,10)
-        movxcar3=movxcar3+random.randint(0,10)
+        movXCarVermelho = movXCarVermelho + random.randint(0,10)
+        movXCarAmarelo = movXCarAmarelo + random.randint(0,10)
+        movxcarAzul=movxcarAzul+random.randint(0,10)
 
     else:
         pygame.mixer.music.stop()
@@ -50,33 +53,36 @@ while True:
             somDaVitoria = True
         
     
-    if movXCar1 > 1000:
-        movXCar1 = 0
-        posYCar1 = 350
+    if movXCarVermelho > 1000:
+        movXCarVermelho = 0
+        posYCarVermelho = 350
         
-    if movXCar2 > 1000:
-        movXCar2 = 0
-        posYCar2 = 480       
+    if movXCarAmarelo > 1000:
+        movXCarAmarelo = 0
+        posYCarAmarelo = 400   
 
-    if movxcar3 > 1000:
-        movxcar3 = 0
-        posycar3 = 480                      
+    if movxcarAzul > 1000:
+        movxcarAzul = 0
+        posycarAzul = 500                    
     
     fonte = pygame.font.Font("freesansbold.ttf",60)
     textoVermelho = fonte.render("Vermelho Ganhou!", True, branco)
     textoAmarelo = fonte.render("Amarelo Ganhou!", True, branco)
-    
-    if posYCar1 == 350 and movXCar1 >= 900 and movXCar1 > movXCar2 and movxcar3:
+    textoAzul = fonte.render("Azul Ganhou!", True, branco)
+
+    if posYCarVermelho == 350 and movXCarVermelho >= 900 and movXCarVermelho > movXCarAmarelo and movxcarAzul:
         tela.blit(textoVermelho, (270,70))
         acabou = True
         
-    elif posYCar2 == 480 and movXCar2 >= 900 and movXCar2 > movXCar1 and movxcar3:
+    elif posYCarAmarelo == 400 and movXCarAmarelo >= 900 and movXCarAmarelo > movXCarVermelho and movxcarAzul:
         tela.blit(textoAmarelo, (270,180))
         acabou = True
 
-    elif posycar3 == 400 and movxcar3 >= 900 and movxcar3 > movXCar1 and movXCar2:
-        tela.blit(textoAmarelo, (270,80))
+    elif posycarAzul == 500 and movxcarAzul >= 900 and movxcarAzul > movXCarAmarelo and movXCarVermelho:
+        tela.blit(textoAzul, (270,80))
         acabou = True     
+          
+
     
     
     pygame.display.update()
